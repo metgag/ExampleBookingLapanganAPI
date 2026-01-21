@@ -51,15 +51,16 @@ namespace BookingVenueApi.Controllers
 
                 while (jam < h.JamAkhir)
                 {
+                    var nextIntervalJam = jam.Add(TimeSpan.FromMinutes(h.IntervalMenit));
+
                     result.Add(new JadwalLapanganResponse
                     {
                         NamaLapangan = lap.Nama,
                         JenisOlahraga = lap.JenisOlahraga,
-                        Jam = $"{jam:hh\\:mm} - {jam.Add(TimeSpan.FromMinutes(h.IntervalMenit)):hh\\:mm}",
+                        Jam = $"{jam:hh\\:mm} - {nextIntervalJam:hh\\:mm}",
                         Harga = h.Harga,
                     });
-
-                    jam = jam.Add(TimeSpan.FromMinutes(h.IntervalMenit));
+                    jam = nextIntervalJam;
                 }
             }
 
